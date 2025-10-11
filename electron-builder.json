@@ -1,0 +1,57 @@
+{
+	"productName": "TRT",
+	"appId": "org.erb.trt",
+	"directories": {
+		"output": "dist"
+	},
+	"files": [
+		"src/electron.cjs",
+		"src/preload.cjs",
+		"src/main/**/*",
+		"src/main/updater.cjs",
+		"src/main/classes/index.cjs",
+		"src/main/classes/mediaServer.cjs",
+		"src/main/classes/milluminServer.cjs",
+		"src/main/classes/servers.cjs",
+		"src/main/classes/store.cjs",
+		"src/main/utils/index.cjs",
+		"src/main/utils/setIps.cjs",
+		{
+			"from": "build",
+			"to": ""
+		}
+	],
+	"mac": {
+		"target": {
+			"target": "default",
+			"arch": ["arm64", "x64"]
+		},
+		"type": "distribution",
+		"hardenedRuntime": true,
+		"entitlements": "assets/entitlements.mac.plist",
+		"entitlementsInherit": "assets/entitlements.mac.plist",
+		"gatekeeperAssess": false
+	},
+	"dmg": {
+		"contents": [
+			{
+				"x": 130,
+				"y": 220
+			},
+			{
+				"x": 410,
+				"y": 220,
+				"type": "link",
+				"path": "/Applications"
+			}
+		]
+	},
+	"publish": {
+		"provider": "github",
+		"owner": "dlamon1",
+		"repo": "trt"
+	},
+	"win": {
+		"target": ["nsis"]
+	}
+}
