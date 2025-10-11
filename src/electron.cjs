@@ -22,15 +22,15 @@ try {
 	console.error(e);
 }
 
-const serveURL = serve({ directory: '.' });
+const serveURL = serve({ directory: 'build' });
 const port = process.env.PORT || 5173;
 const dev = !app.isPackaged;
 let mainWindow;
 
 function createWindow() {
-	let windowState = windowStateManager({
-		defaultWidth: 400,
-		defaultHeight: 600,
+	const windowState = windowStateManager({
+		defaultWidth: 1280,
+		defaultHeight: 800,
 	});
 
 	const mainWindow = new BrowserWindow({
