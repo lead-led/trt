@@ -16,10 +16,7 @@
 		"src/main/classes/store.cjs",
 		"src/main/utils/index.cjs",
 		"src/main/utils/setIps.cjs",
-		{
-			"from": "build",
-			"to": ""
-		}
+		"build/**/*"
 	],
 	"mac": {
 		"target": {
