@@ -14,6 +14,3 @@
 {#if ready}
 	{@render children?.()}
 {/if}
-
-<style>
-</style>

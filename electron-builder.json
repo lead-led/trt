@@ -48,7 +48,7 @@
 	},
 	"publish": {
 		"provider": "github",
-		"owner": "dlamon1",
+		"owner": "lead-led",
 		"repo": "trt"
 	},
 	"win": {
