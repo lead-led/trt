@@ -48,6 +48,19 @@
 		"owner": "lead-led",
 		"repo": "trt"
 	},
+	"linux": {
+		"target": [
+			{
+				"target": "AppImage",
+				"arch": ["x64"]
+			},
+			{
+				"target": "snap",
+				"arch": ["x64"]
+			}
+		],
+		"category": "Utility"
+	},
 	"win": {
 		"target": ["nsis"]
 	}
