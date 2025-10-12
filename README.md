@@ -12,11 +12,6 @@ TRT is a desktop timing companion for show control operators. It connects to Mit
 
 - [Latest release builds](https://github.com/lead-led/trt/releases)
 
-**Bleeding edge builds**
-
-- Clone this repository, run `npm install`, then `npm run dev` for a hot-reload dev session.
-- Build distributables locally with `npm run package`.
-
 **Issue tracking**
 
 - Share bug reports or feature requests via [GitHub Issues](https://github.com/lead-led/trt/issues).
