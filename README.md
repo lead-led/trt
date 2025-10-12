@@ -1,69 +1,43 @@
-# State Structure
+# [TRT (Total Remaining Time)](https://github.com/lead-led/trt)
 
-There are two object types that are represented in the UI
+TRT is a desktop timing companion for show control operators. It connects to Mitti, Millumin, and Playback Pro, then renders draggable countdown tiles so you always see the remaining time for every cue.
 
--   Times
--   Instances
+---
 
-### Times
+**Documentation**
 
-Times are the actual time objects that display the formated time of their reflective instance. Times are represented by the Time.svelte component, they are rendered in the +page.svelte.
+- [User Guide](docs/USER_GUIDE.md)
 
-### Instances
+**Downloads**
 
-Instances are the objects that represent the connection to their respective playback device. Instances are represented by a respective instance component that renders in Settings.svelte component.
+- [Latest release builds](https://github.com/lead-led/trt/releases)
 
-# Controllers
+**Bleeding edge builds**
 
-There are seperate controllers for both the main and the render process. The render controller is essentially a store for reactivity.
+- Clone this repository, run `npm install`, then `npm run dev` for a hot-reload dev session.
+- Build distributables locally with `npm run package`.
 
-### Render
+**Issue tracking**
 
--   lib/controllers/instance_controller.ts
+- Share bug reports or feature requests via [GitHub Issues](https://github.com/lead-led/trt/issues).
 
-### Main
+---
 
--   main/controllers/server_controller.ts
+## Supported playback systems
 
-### IPC
+- Mitti (OSC time remaining)
+- Millumin (OSC layer media timers)
+- Playback Pro (TCP time remaining polling)
 
-Controller for IPC in the render thread is a component title IPC_Controller.svelte
+---
 
-Control in the main thread happens from the electron.cjs file with the ipc.Main listeners at the bottom of the file
+## Contributing
 
-## Creating Playback Instances
+- Pull requests are welcome—check existing [issues](https://github.com/lead-led/trt/issues) or open a new discussion if you have an idea.
+- Please include reproduction steps or logs when reporting connection problems with external playback systems.
 
-Servers / Services are created via the `init-background-object` function. This function takes a single argument, an object, with the following properties:
+---
 
-```js
+## License
 
-get thisObj() {
-  return {
-    id: this.id,
-    port: get(this.port),
-    localIp: get(this.ip),
-    isConnected: get(this.isConnected),
-    layers: get(this.layers),
-    index: this.\_index,
-    type: 'playbackpro',
-  };
-}
-
-```
-
-The server types are:
-
--   `playbackpro`
--   `mitti`
--   `millumin`
-
-## Libraries Referece
-
-https://www.neodrag.dev/docs/svelte
-
-https://carbon-components-svelte.onrender.com/components/Slider
-
-## Icons
-
-https://icones.js.org/collection/material-symbols?s=settings
-https://github.com/antfu/unplugin-icons
+TRT is released under the MIT License. See [LICENSE](LICENSE) for details.
