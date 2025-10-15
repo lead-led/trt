@@ -1,0 +1,105 @@
+name: Comment Triggered Release
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    if: github.event.issue.pull_request != null
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check release comment
+        id: command
+        run: |
+          set -euo pipefail
+          body="${{ github.event.comment.body }}"
+          body="$(printf '%s' "$body" | tr '[:upper:]' '[:lower:]' | tr -d '\r')"
+          body="$(printf '%s' "$body" | xargs)"
+
+          echo "should_run=false" >> "$GITHUB_OUTPUT"
+
+          case "${{ github.event.comment.author_association }}" in
+            OWNER|MEMBER|COLLABORATOR) ;;
+            *)
+              echo "Comment ignored: user lacks permission (association=${{ github.event.comment.author_association }})."
+              exit 0
+              ;;
+          esac
+
+          case "$body" in
+            release-patch) level=patch ;;
+            release-minor) level=minor ;;
+            release-major) level=major ;;
+            *)
+              echo "Comment ignored: no release command found."
+              exit 0
+              ;;
+          esac
+
+          echo "should_run=true" >> "$GITHUB_OUTPUT"
+          echo "level=$level" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch PR details
+        id: pr
+        if: steps.command.outputs.should_run == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const prNumber = context.issue.number;
+            const pr = await github.rest.pulls.get({ owner, repo, pull_number: prNumber });
+
+            if (!pr.data.merged) {
+              core.setFailed('Release commands can only run on merged pull requests.');
+              return;
+            }
+
+            core.setOutput('baseRef', pr.data.base.ref);
+
+      - name: Checkout base branch
+        if: steps.command.outputs.should_run == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.pr.outputs.baseRef }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Update base branch
+        if: steps.command.outputs.should_run == 'true'
+        run: |
+          git fetch origin ${{ steps.pr.outputs.baseRef }}
+          git checkout ${{ steps.pr.outputs.baseRef }}
+          git pull --ff-only origin ${{ steps.pr.outputs.baseRef }}
+
+      - name: Set up Node.js
+        if: steps.command.outputs.should_run == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run release script
+        if: steps.command.outputs.should_run == 'true'
+        run: npm run release:${{ steps.command.outputs.level }}
+
+      - name: Capture version
+        id: version
+        if: steps.command.outputs.should_run == 'true'
+        run: echo "version=$(node -p \"require('./package.json').version\")" >> "$GITHUB_OUTPUT"
+
+      - name: Comment on PR
+        if: steps.command.outputs.should_run == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: context.issue.number,
+              body: `Release v${{ steps.version.outputs.version }} triggered via comment (level: ${{ steps.command.outputs.level }}).`
+            });
