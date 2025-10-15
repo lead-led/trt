@@ -1,4 +1,4 @@
-# [TRT (Total Remaining Time)](https://github.com/lead-led/trt)
+# TRT (Total Remaining Time)
 
 TRT is a desktop timing companion for show control operators. It connects to Mitti, Millumin, and Playback Pro, then renders draggable countdown tiles so you always see the remaining time for every cue.
 
@@ -35,4 +35,4 @@ TRT is a desktop timing companion for show control operators. It connects to Mit
 
 ## License
 
-TRT is released under the MIT License. See [LICENSE](LICENSE) for details.
+TRT is released under the PolyForm Noncommercial License 1.0.0. See [LICENSE](LICENSE) for details.
