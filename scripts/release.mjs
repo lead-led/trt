@@ -6,7 +6,7 @@ const args = [
   'electron-builder.json',
   '--publish',
   'always',
-  '-mw',
+  '-mwl',
 ];
 
 const child = spawn('electron-builder', args, {

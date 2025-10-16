@@ -1,6 +1,6 @@
 {
   "name": "trt",
-  "version": "1.1.0",
+  "version": "1.0.14",
   "private": true,
   "description": "Total Remaining Time.",
   "main": "src/electron.cjs",
@@ -17,9 +17,6 @@
     "build:electron": "electron-builder -w --config electron-builder.json",
     "publish": "node scripts/release.mjs",
     "release": "node scripts/release.mjs",
-    "release:patch": "node scripts/create-release.mjs patch",
-    "release:minor": "node scripts/create-release.mjs minor",
-    "release:major": "node scripts/create-release.mjs major",
     "major": "node version/major",
     "minor": "node version/minor",
     "patch": "node version/patch",
