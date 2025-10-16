@@ -7,6 +7,7 @@ TRT is a desktop timing companion for show control operators. It connects to Mit
 **Documentation**
 
 - [User Guide](docs/USER_GUIDE.md)
+- [Release Process](docs/RELEASE_PROCESS.md)
 
 **Downloads**
 
