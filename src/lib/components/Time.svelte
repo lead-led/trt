@@ -3,14 +3,9 @@
 
 	import { tweened } from 'svelte/motion';
 	import { appState } from '$lib/stores/app';
-	import { draggable } from '@neodrag/svelte';
-	// @ts-ignore
-	import CloseIcon from '~icons/material-symbols/cancel-outline-rounded';
-	import { fade } from 'svelte/transition';
 
 	let previousTime = { hours: '00', minutes: '00', seconds: '00' };
 	let isTimerStatic = $state(false);
-	let size = $state(100);
 
 	const checkTimerStatic = () => {
 		if (
@@ -45,42 +40,6 @@
 	const progress = tweened(0, {
 		duration: 100,
 	});
-
-	let ref: NodeJS.Timeout | null = null;
-
-	const handleMouseOver = () => {
-		document.body.style.cursor = 'move';
-		ref && clearTimeout(ref);
-
-		isFormatOpen = true;
-	};
-
-	const handleMouseLeave = () => {
-		document.body.style.cursor = 'default';
-
-		ref && clearTimeout(ref);
-
-		ref = setTimeout(() => {
-			isFormatOpen = false;
-		}, 1000);
-	};
-
-	const handleMouseOverSettings = () => {
-		document.body.style.cursor = 'move';
-		ref && clearTimeout(ref);
-
-		isFormatOpen = true;
-	};
-
-	const handleMouseLeaveSettings = () => {
-		document.body.style.cursor = 'default';
-
-		ref && clearTimeout(ref);
-
-		ref = setTimeout(() => {
-			isFormatOpen = false;
-		}, 1000);
-	};
 
 	type TimeStatus = 'default' | 'warning' | 'critical';
 
@@ -147,24 +106,22 @@
 		}
 	});
 
-	function stopPropagation(event: MouseEvent) {
-		event.stopPropagation();
-	}
-
-	let isFormatOpen = $state(false);
 </script>
 
-<div class="timer-wrapper" use:draggable>
-	<div class="asdf-container" onpointerenter={handleMouseOver} onpointerleave={handleMouseLeave}>
+<div class="timer-wrapper">
+	<div class="asdf-container">
 		{#if appState.isTextOnTop}
-			<div class="name" style={`text-align: ${appState.textAlignment}; font-size: ${+size * 0.5}px`}>
+			<div
+				class="name"
+				style={`text-align: ${appState.textAlignment}; font-size: ${appState.labelFontSize}px`}
+			>
 				{time.name.replace('layer:', '').toUpperCase()}
 			</div>
 		{/if}
 
 		<div
 			class="time-container"
-			style={`background: ${backgroundColor}; color: ${textColor}; font-size: ${+size}px; opacity: ${opacity}`}
+			style={`background: ${backgroundColor}; color: ${textColor}; font-size: ${appState.timeFontSize}px; opacity: ${opacity}`}
 		>
 			<div class="time-display">
 				<span class="time-part">{time.hours}</span><span class="time-separator">:</span
@@ -184,38 +141,20 @@
 			</div>
 		{/if}
 	</div>
-
-	<div
-		class="format-container"
-		onpointerenter={handleMouseOverSettings}
-		onpointerleave={handleMouseLeaveSettings}
-		onpointerdown={stopPropagation}
-		style={`opacity: ${isFormatOpen ? 1 : 0}; pointer-events: ${isFormatOpen ? 'auto' : 'none'};`}
-		transition:fade|global={{ duration: 70 }}
-	>
-		<input type="range" min="20" max="300" step="1" bind:value={size} />
-		<!-- <CloseIcon /> -->
-	</div>
 </div>
 
 <style>
 	.timer-wrapper {
 		position: relative;
-		display: inline-block;
-	}
-	.format-container {
-		cursor: default;
-		font-size: 16px;
 		display: flex;
-		flex-direction: row;
-		outline: solid white 1px;
-		padding: 15px 50px;
-		border-radius: 3px;
-		position: absolute;
-		top: calc(100% + 10px);
-		left: 50%;
-		transform: translateX(-50%);
-		z-index: 1;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		flex: 1 1 320px;
+		max-width: 640px;
+		max-height: 90vh;
+		width: 100%;
+		box-sizing: border-box;
 	}
 	progress {
 		width: 100%;
@@ -244,6 +183,8 @@
 		position: relative;
 		transition: opacity 0.25s ease-in-out;
 		font-variant-numeric: tabular-nums;
+		max-width: 100%;
+		max-height: 100%;
 	}
 	.time-display {
 		display: flex;
@@ -260,5 +201,13 @@
 		outline-color: rgba(173, 216, 230, 0);
 		outline-style: dashed;
 		transition: border-color 0.2s;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 16px;
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
 	}
 </style>

@@ -12,6 +12,7 @@
 	import SettingsIcon from '~icons/material-symbols/settings-outline';
 
 	import { times } from '$lib/controllers/instances_controller';
+	import { derived } from 'svelte/store';
 
 	const handleClick = () => {
 		settingsButtonOpacity = 0;
@@ -37,6 +38,29 @@
 
 		clearSettingsButton();
 	};
+
+	const sortedTimes = derived(times, ($times) => {
+		return [...$times].sort((a, b) => {
+			const toNumber = (value: unknown) =>
+				Number.isFinite(Number(value)) ? Number(value) : Number.POSITIVE_INFINITY;
+
+			const aRunning = Boolean(a.running);
+			const bRunning = Boolean(b.running);
+
+			if (aRunning !== bRunning) {
+				return bRunning ? 1 : -1;
+			}
+
+			const aRemaining = toNumber(a.timeRemaining);
+			const bRemaining = toNumber(b.timeRemaining);
+
+			if (aRemaining === bRemaining) {
+				return a.name.localeCompare(b.name);
+			}
+
+			return aRemaining - bRemaining;
+		});
+	});
 </script>
 
 {#if appState.isDev}
@@ -65,7 +89,7 @@
 	{/if}
 
 	<div class="container">
-		{#each $times as time}
+		{#each $sortedTimes as time}
 			{#if time.isVisible}
 				<Time {time} />
 			{/if}
@@ -94,14 +118,21 @@
 		overflow: hidden;
 		width: 100vw;
 		height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 	.container {
-		width: 100vw;
-		height: 100vh;
+		width: 100%;
+		height: 100%;
 		display: flex;
-		justify-content: space-evenly;
+		flex-wrap: wrap;
+		justify-content: center;
 		align-items: center;
-		flex-direction: column;
+		align-content: center;
+		gap: 32px;
+		padding: 40px;
+		box-sizing: border-box;
 	}
 	:root {
 		font-family: 'Overpass', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,

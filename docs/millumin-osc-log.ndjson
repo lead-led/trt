@@ -1,0 +1,12 @@
+{"timestamp":"2025-10-29T17:18:31.398Z","id":"UR1ksOYat6bkiCun89FIR","level":"info","event":"constructor","payload":{"id":"UR1ksOYat6bkiCun89FIR"}}
+{"timestamp":"2025-10-29T17:18:33.484Z","id":"UR1ksOYat6bkiCun89FIR","level":"info","event":"startLocalServer","payload":{"port":8000,"ip":"127.0.0.1"}}
+{"timestamp":"2025-10-29T17:18:33.489Z","id":"UR1ksOYat6bkiCun89FIR","level":"info","event":"udpReady","payload":{"localAddress":"127.0.0.1","localPort":8000,"remoteAddress":"127.0.0.1","remotePort":"5000"}}
+{"timestamp":"2025-10-29T17:18:33.489Z","id":"UR1ksOYat6bkiCun89FIR","level":"info","event":"pingMillumin","payload":{"address":"/ping"}}
+{"timestamp":"2025-10-29T17:18:33.491Z","id":"UR1ksOYat6bkiCun89FIR","level":"info","event":"pingMillumin","payload":{"address":"/ping"}}
+{"timestamp":"2025-10-29T17:18:37.936Z","id":"gb7UDfFcy5fXOdmf2OmRU","level":"info","event":"constructor","payload":{"id":"gb7UDfFcy5fXOdmf2OmRU"}}
+{"timestamp":"2025-10-29T17:18:49.775Z","id":"UR1ksOYat6bkiCun89FIR","level":"info","event":"stopLocalServer","payload":{"id":"UR1ksOYat6bkiCun89FIR"}}
+{"timestamp":"2025-10-29T17:19:07.920Z","id":"mtXdH7ZnzJflJ2Muews8g","level":"info","event":"constructor","payload":{"id":"mtXdH7ZnzJflJ2Muews8g"}}
+{"timestamp":"2025-10-29T17:19:19.973Z","id":"Um77wo4bQsA-lbwrXFZ_C","level":"info","event":"constructor","payload":{"id":"Um77wo4bQsA-lbwrXFZ_C"}}
+{"timestamp":"2025-10-29T17:19:56.776Z","id":"qeeFIlEq1H9mtndWJBaRG","level":"info","event":"constructor","payload":{"id":"qeeFIlEq1H9mtndWJBaRG"}}
+{"timestamp":"2025-10-29T17:20:59.088Z","id":"p30Y94Pttq6-gnJWweMiN","level":"info","event":"constructor","payload":{"id":"p30Y94Pttq6-gnJWweMiN"}}
+{"timestamp":"2025-10-29T17:21:15.762Z","id":"kRdDBcQHR8e8-yD766KIZ","level":"info","event":"constructor","payload":{"id":"kRdDBcQHR8e8-yD766KIZ"}}
