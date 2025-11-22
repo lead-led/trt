@@ -6,8 +6,6 @@
 	import Dev from '$lib/components/Dev.svelte';
 	import { appState, toggleSettings } from '$lib/stores/app';
 
-	
-
 	// @ts-ignore
 	import SettingsIcon from '~icons/material-symbols/settings-outline';
 

@@ -14,13 +14,9 @@
 		"build": "npm run patch && cross-env NODE_ENV=production npm run build:svelte && npm run build:electron",
 		"package": "cross-env NODE_ENV=production npm run build:svelte && electron-builder --config electron-builder.json --publish=never",
 		"build:svelte": "vite build",
-		"build:electron": "electron-builder -mwl --config electron-builder.json",
-		"publish": "electron-builder --config electron-builder.json --publish always -mwl",
-		"publish:local": "cross-env NODE_ENV=production npm run build:svelte && electron-builder --config electron-builder.json --publish always -ml",
-		"release:i": "node scripts/release.js",
-		"publishmac": "electron-builder --config electron-builder.json --publish always -m",
-		"release": "electron-builder --config electron-builder.json --publish always",
-		"dist": "electron-builder --config electron-builder.json",
+		"build:electron": "electron-builder -w --config electron-builder.json",
+		"publish": "node scripts/release.mjs",
+		"release": "node scripts/release.mjs",
 		"release:patch": "node scripts/create-release.mjs patch",
 		"release:minor": "node scripts/create-release.mjs minor",
 		"release:major": "node scripts/create-release.mjs major",
@@ -82,7 +78,7 @@
 		"tslib": "^2.5.0",
 		"typescript": "^5.7.0",
 		"unplugin-icons": "^0.16.5",
-		"vite": "^6.3.0"
+		"vite": "^6.4.1"
 	},
 	"overrides": {
 		"electron": {
