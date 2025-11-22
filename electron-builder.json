@@ -49,19 +49,10 @@
 		"repo": "trt"
 	},
 	"linux": {
-		"target": [
-			{
-				"target": "AppImage",
-				"arch": ["x64"]
-			},
-			{
-				"target": "snap",
-				"arch": ["x64"]
-			}
-		],
+		"target": ["AppImage", "tar.gz"],
 		"category": "Utility"
 	},
 	"win": {
-		"target": ["nsis"]
+		"target": "nsis"
 	}
 }

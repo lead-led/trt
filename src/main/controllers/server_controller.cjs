@@ -40,6 +40,14 @@ class ServerController {
 		}
 	}
 
+	handlePingServer(msg) {
+		const { type } = msg;
+
+		if (type === 'millumin') {
+			this.pingMilluminServer(msg);
+		}
+	}
+
 	handleInitBackendObject(msg) {
 		const { type } = msg;
 
@@ -91,6 +99,11 @@ class ServerController {
 	stopMilluminServer(msg) {
 		const server = this.milluminServers.find((s) => s.id === msg.id);
 		server.stopLocalServer();
+	}
+
+	pingMilluminServer(msg) {
+		const server = this.milluminServers.find((s) => s.id === msg.id);
+		server?.pingMillumin?.();
 	}
 
 	stopMittiServer(msg) {

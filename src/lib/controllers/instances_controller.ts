@@ -211,6 +211,12 @@ export function deleteMittiInstance(id: string) {
 	mittiInstances.set(newInstances);
 }
 
+export function removeMilluminLayerTime(id: string, layerName: string) {
+	times.update((currentTimes) =>
+		currentTimes.filter((time) => !(time.id === id && time.name === layerName)),
+	);
+}
+
 export function deleteMilluminInstance(id: string) {
 	deleteTime(id);
 	const newInstances = get(milluminInstances).filter((instance) => instance.id !== id);

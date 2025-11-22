@@ -125,6 +125,11 @@ function createMainWindow() {
 			msg = JSON.parse(msg);
 			server_controller.handleStopServer(msg);
 		});
+
+		ipcMain.on('ping-server', (event, msg) => {
+			msg = JSON.parse(msg);
+			server_controller.handlePingServer(msg);
+		});
 	});
 
 	if (dev) loadVite(port);
