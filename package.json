@@ -58,7 +58,7 @@
 	"devDependencies": {
 		"@iconify/json": "^2.2.103",
 		"@sveltejs/adapter-static": "^3.0.3",
-		"@sveltejs/kit": "^2.46.4",
+		"@sveltejs/kit": "^2.49.5",
 		"@typescript-eslint/eslint-plugin": "^5.56.0",
 		"@typescript-eslint/parser": "^5.56.0",
 		"carbon-components-svelte": "^0.78.0",
